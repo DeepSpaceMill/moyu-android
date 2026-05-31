@@ -93,3 +93,7 @@ adb shell am start -n ink.momoyu.example/.MainActivity
 # Windows
 gradlew.bat :app:assembleRelease
 ```
+
+## License
+
+本项目遵循 MIT 许可证，详情请参阅 LICENSE 文件。
