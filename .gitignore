@@ -14,3 +14,6 @@ local.properties
 # Added by cargo
 
 /target
+
+# game assets
+app/src/main/assets
