@@ -7,8 +7,8 @@ export ANDROID_HOME="path/to/sdk"
 rustup target add aarch64-linux-android
 cargo install cargo-ndk
 
-cargo ndk -t arm64-v8a -o app/src/main/jniLibs/  build
+cargo ndk -t arm64-v8a -o app/src/main/jniLibs/ build --release
 ./gradlew build
 ./gradlew installDebug
-adb shell am start -n moe.doufu.demo/.MainActivity
+adb shell am start -n ink.momoyu.example/.MainActivity
 ```

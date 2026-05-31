@@ -1,4 +1,4 @@
-package moe.doufu.demo;
+package ink.momoyu.example;
 
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -12,7 +12,6 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.view.View;
 import android.view.WindowManager;
-import android.util.Log;
 
 public class MainActivity extends GameActivity {
 
@@ -27,10 +26,8 @@ public class MainActivity extends GameActivity {
 
         // Load the native library.
         // The name "android-game" depends on your CMake configuration, must be
-        // consistent here and inside AndroidManifect.xml
-        Log.d("myTag", "This is my message");
-        System.loadLibrary("hai_lib");
-        Log.d("myTag", "This is my message2222");
+        // consistent here and inside AndroidManifest.xml.
+        System.loadLibrary("moyu");
     }
 
     private void hideSystemUI() {
@@ -62,6 +59,12 @@ public class MainActivity extends GameActivity {
         // super.setImeEditorInfoFields(InputType.TYPE_CLASS_TEXT,
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
     }
 
     public boolean isGooglePlayGames() {
