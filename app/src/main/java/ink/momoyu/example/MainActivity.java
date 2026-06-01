@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-public class MainActivity extends GameActivity {
+import androidx.activity.OnBackPressedCallback;
 
+public class MainActivity extends GameActivity {
     static {
         // Load the STL first to workaround issues on old Android versions:
         // "if your app targets a version of Android earlier than Android 4.3
@@ -59,12 +61,50 @@ public class MainActivity extends GameActivity {
         // super.setImeEditorInfoFields(InputType.TYPE_CLASS_TEXT,
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         super.onCreate(savedInstanceState);
+        installBackHandler();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         hideSystemUI();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Ensure the process is killed when the activity is destroyed, to prevent it from being
+        // killed in the background and then restarted by the system with a new activity instance.
+        // See https://developer.android.com/guide/components/activities/activity-lifecycle#onstop
+        System.exit(0);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onBackPressed() {
+        requestExitFromBack();
+    }
+
+    private void installBackHandler() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requestExitFromBack();
+            }
+        });
+    }
+
+    private void requestExitFromBack() {
+        dispatchSyntheticBackKey();
+    }
+
+    private void dispatchSyntheticBackKey() {
+        long now = android.os.SystemClock.uptimeMillis();
+        KeyEvent down = new KeyEvent(now, now, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK, 0);
+        KeyEvent up = new KeyEvent(now, now, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK, 0);
+
+        onKeyDown(KeyEvent.KEYCODE_BACK, down);
+        onKeyUp(KeyEvent.KEYCODE_BACK, up);
     }
 
     public boolean isGooglePlayGames() {
