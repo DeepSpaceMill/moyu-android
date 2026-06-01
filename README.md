@@ -81,7 +81,7 @@ gradlew.bat :app:installDebug
 启动 Activity：
 
 ```bash
-adb shell am start -n ink.momoyu.example/.MainActivity
+adb shell am start -n ink.momoyu.runtime/.MainActivity
 ```
 
 构建 release APK：

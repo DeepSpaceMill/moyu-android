@@ -9,7 +9,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ink.momoyu.example"
+        applicationId = "ink.momoyu.runtime"
         minSdk = 28
         targetSdk = 36
         versionCode = 1
@@ -40,7 +40,7 @@ android {
         }
     }
 
-    namespace = "ink.momoyu.example"
+    namespace = "ink.momoyu.runtime"
 }
 
 dependencies {
