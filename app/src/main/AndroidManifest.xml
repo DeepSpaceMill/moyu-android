@@ -6,13 +6,13 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="末语Demo"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RustTemplate">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="${moyuScreenOrientation}"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
             <intent-filter>
