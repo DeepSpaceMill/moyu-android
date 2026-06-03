@@ -10,7 +10,6 @@
 
 - JDK 17
 - Android SDK 36
-- Android NDK >=30
 - 如需本地构建 `libmoyu.so`，请参考引擎主仓库的相关说明。
 
 ## 引擎库放置
