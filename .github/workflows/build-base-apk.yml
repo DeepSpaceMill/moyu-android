@@ -1,0 +1,29 @@
+name: Build base APK
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    # Pinned, not ubuntu-latest: this image preinstalls JDK 17 and android-36.
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build base APK
+        run: |
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          ./gradlew :app:assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: base-apk
+          if-no-files-found: error
+          path: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/release/output-metadata.json

@@ -32,7 +32,7 @@ android {
 
     defaultConfig {
         applicationId = exportOrGradleProperty("MOYU_APPLICATION_ID", "ink.momoyu.runtime")
-        minSdk = 28
+        minSdk = 26
         targetSdk = 36
         versionCode = exportOrGradleProperty("MOYU_VERSION_CODE", "1").toInt()
         versionName = exportOrGradleProperty("MOYU_VERSION_NAME", "1.0.0")
@@ -64,6 +64,15 @@ android {
         }
         debug {
             isMinifyEnabled = false
+        }
+    }
+
+    // Native libraries must stay uncompressed and page-aligned inside the APK
+    // (manifest extractNativeLibs="false"). The repackaging flow injects .so
+    // files as stored entries, so this must stay off.
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
         }
     }
 
